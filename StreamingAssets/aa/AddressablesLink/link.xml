@@ -40,7 +40,9 @@
     <type fullname="Temp.ChangeActiveByPlatform" preserve="all" />
     <type fullname="ThirdPayPage" preserve="all" />
     <type fullname="UI.Extension.TextGradient" preserve="all" />
-    <type fullname="WebGLKeyboard.KeyboardController" preserve="all" />
+    <type fullname="Vuplex.WebView.CanvasPointerInputDetector" preserve="all" />
+    <type fullname="Vuplex.WebView.CanvasWebViewPrefab" preserve="all" />
+    <type fullname="Vuplex.WebView.Internal.CanvasViewportMaterialView" preserve="all" />
     <type fullname="BottleData" preserve="nothing" serialized="true" />
     <type fullname="I2.Loc.EventCallback" preserve="nothing" serialized="true" />
     <type fullname="SuperScrollView.GridViewItemPrefabConfData" preserve="nothing" serialized="true" />
