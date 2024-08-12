@@ -57,12 +57,12 @@
 
       function getCookie() {
         var cookieArray = document.cookie.split(';');
-        var cookies = {};
-        cookieArray.forEach(function(cookie) {
-          var parts = cookie.split('=');
-          cookies[parts[0].trim()] = (parts[1] || '').trim();
-        });
-        return cookies;
+        // var cookies = {};
+        // cookieArray.forEach(function(cookie) {
+        //   var parts = cookie.split('=');
+        //   cookies[parts[0].trim()] = (parts[1] || '').trim();
+        // });
+        return cookieArray;
       }
 
       var buildUrl = "Build";
