@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | WebGLInput</title>
+    <title>Unity WebGL Player | Water Puzzle</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
@@ -20,7 +20,7 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">WebGLInput</div>
+        <div id="unity-build-title">Water Puzzle</div>
       </div>
     </div>
     <script>
@@ -55,21 +55,6 @@
         updateBannerVisibility();
       }
 
-      // 生成UUID通用唯一标识码
-      function createUUID() {
-        let result = []
-        let hexDigits = "0123456789abcdef"
-        for (let i = 0; i < 36; i++) {
-          result[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1)
-        }
-        // bits 12-15 of the time_hi_and_version field to 0010
-        result[14] = "4"
-        // bits 6-7 of the clock_seq_hi_and_reserved to 01
-        result[19] = hexDigits.substr((result[19] & 0x3) | 0x8, 1)
-        result[8] = result[13] = result[18] = result[23] = "-"
-        return result.join("")
-      }
-
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/water.loader.js";
       var config = {
@@ -77,9 +62,9 @@
         frameworkUrl: buildUrl + "/water.framework.js.unityweb",
         codeUrl: buildUrl + "/water.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "WebGLInput",
-        productVersion: "0.1",
+        companyName: "DEC007_WaterPuzzleBeach",
+        productName: "Water Puzzle",
+        productVersion: "1.0.1",
         showBanner: unityShowBanner,
       };
 
@@ -103,8 +88,7 @@
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
-        // 调用函数并打印结果
-        
+
         unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
@@ -112,8 +96,7 @@
         canvas.style.width = "960px";
         canvas.style.height = "600px";
       }
-      var cookies = createUUID();
-      console.log("啊啊啊啊啊点点滴滴 = "+cookies);
+
       loadingBar.style.display = "block";
 
       var script = document.createElement("script");
@@ -124,7 +107,7 @@
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
+            window.vuplex.SetFullscreen(1)/*https://support.vuplex.com/articles/webgl-fullscreen*/;
           };
         }).catch((message) => {
           alert(message);
