@@ -55,20 +55,6 @@
         updateBannerVisibility();
       }
 
-      window.addEventListener('popstate',
-              e => {
-                //添加点击返回处理逻辑
-              },
-              false
-      );
-
-      let state = {
-        title: "title",
-        url: null
-      };
-      window.history.pushState(state, "title", null);
-      window.history.pushState(state, "title", null);
-
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/water.loader.js";
       var config = {
