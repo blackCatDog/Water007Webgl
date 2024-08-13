@@ -30,6 +30,7 @@
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var warningBanner = document.querySelector("#unity-warning");
+      var gameInstance = null;
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -101,11 +102,11 @@
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'hidden') {
           console.log("当应用进入后台或锁屏时暂停音频");
-          SendMessage('AudioManager', 'Pause');
+          gameInstance.SendMessage('AudioManager', 'Pause');
           //pauseAudio(); // 当应用进入后台或锁屏时暂停音频
         } else {
           console.log("当应用回到前台时重新播放音频");
-          SendMessage('AudioManager', 'Play');
+          gameInstance.SendMessage('AudioManager', 'Play');
           //playAudio(); // 当应用回到前台时重新播放音频
         }
       });
@@ -118,6 +119,7 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+          gameInstance = unityInstance;
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
