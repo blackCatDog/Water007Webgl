@@ -68,41 +68,6 @@
       };
       window.history.pushState(state, "title", null);
 
-      export default class PopStateMgr{
-        /**
-         * @desc: 注册返回事件
-         * @param {type}
-         * @return:
-         */
-        static push(onBackClick:any){
-          PopStateMgr._events.push(onBackClick);
-          let state = {
-            title: "title",
-            url: null
-          };
-          window.history.pushState(state, "title", null);
-          window.addEventListener('popstate',
-                  e => {
-                    PopStateMgr._onBackClick();
-                  },
-                  false
-          );
-        }
-
-        private static _onBackClick(){
-          if(PopStateMgr._events.length <= 0){
-            return;
-          }
-
-          let func = PopStateMgr._events.pop();
-          if(func != null){
-            func();
-          }
-        }
-
-        private static _events:any[] = [];
-      }
-
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/water.loader.js";
       var config = {
