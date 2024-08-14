@@ -61,18 +61,7 @@
         updateBannerVisibility();
       }
 
-      // 监听页面可见性变化   监听音乐是否home键 返回键  锁屏操作即停止
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') {
-          console.log("当应用进入后台或锁屏时暂停音频");
-          gameInstance.SendMessage('AudioManager', 'PauseAudio','');
-          //pauseAudio(); // 当应用进入后台或锁屏时暂停音频
-        } else {
-          console.log("当应用回到前台时重新播放音频");
-          gameInstance.SendMessage('AudioManager', 'PlayAudio','');
-          //playAudio(); // 当应用回到前台时重新播放音频
-        }
-      });
+      
 
       //监听返回键     屏幕中有任何操作后点击两次返回才能退出
       window.addEventListener('popstate',
@@ -130,6 +119,19 @@
         canvas.style.height = "600px";
       }
 
+      // 监听页面可见性变化   监听音乐是否home键 返回键  锁屏操作即停止
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          console.log("当应用进入后台或锁屏时暂停音频");
+          gameInstance.SendMessage('AudioManager', 'PauseAudio');
+          //pauseAudio(); // 当应用进入后台或锁屏时暂停音频
+        } else {
+          console.log("当应用回到前台时重新播放音频");
+          gameInstance.SendMessage('AudioManager', 'PlayAudio');
+          //playAudio(); // 当应用回到前台时重新播放音频
+        }
+      });
+      
       loadingBar.style.display = "block";
 
       var script = document.createElement("script");
