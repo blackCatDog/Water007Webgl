@@ -3,15 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Water Puzzle</title>
+    <title>Unity WebGL Player | WebGLInput</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
-  <style>
-    html, body {
-      overscroll-behavior: none;
-    }
-  </style>
   <body>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
@@ -25,7 +20,7 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Water Puzzle</div>
+        <div id="unity-build-title">WebGLInput</div>
       </div>
     </div>
     <script>
@@ -61,33 +56,6 @@
         updateBannerVisibility();
       }
 
-      // 监听页面可见性变化   监听音乐是否home键 返回键  锁屏操作即停止
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') {
-          console.log("当应用进入后台或锁屏时暂停音频");
-          gameInstance.SendMessage('AudioManager', 'Pause');
-          //pauseAudio(); // 当应用进入后台或锁屏时暂停音频
-        } else {
-          console.log("当应用回到前台时重新播放音频");
-          gameInstance.SendMessage('AudioManager', 'Play');
-          //playAudio(); // 当应用回到前台时重新播放音频
-        }
-      });
-
-      //监听返回键     屏幕中有任何操作后点击两次返回才能退出
-      window.addEventListener('popstate',
-              e => {
-                //添加点击返回处理逻辑
-              },
-              false
-      );
-      let state = {
-        title: "title",
-        url: null
-      };
-      window.history.pushState(state, "title", null);
-      window.history.pushState(state, "title", null);
-
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/water.loader.js";
       var config = {
@@ -95,9 +63,9 @@
         frameworkUrl: buildUrl + "/water.framework.js.unityweb",
         codeUrl: buildUrl + "/water.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DEC007_WaterPuzzleBeach",
-        productName: "Water Puzzle",
-        productVersion: "1.0.1",
+        companyName: "DefaultCompany",
+        productName: "WebGLInput",
+        productVersion: "0.1",
         showBanner: unityShowBanner,
       };
 
@@ -122,13 +90,26 @@
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
 
-        // unityShowBanner('WebGL builds are not supported on mobile devices.');
+        unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
         canvas.style.width = "960px";
         canvas.style.height = "600px";
       }
+
+      // 监听页面可见性变化
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          console.log("当应用进入后台或锁屏时暂停音频");
+          gameInstance.SendMessage('AudioManager', 'Pause');
+          //pauseAudio(); // 当应用进入后台或锁屏时暂停音频
+        } else {
+          console.log("当应用回到前台时重新播放音频");
+          gameInstance.SendMessage('AudioManager', 'Play');
+          //playAudio(); // 当应用回到前台时重新播放音频
+        }
+      });
 
       loadingBar.style.display = "block";
 
@@ -138,10 +119,10 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
-          loadingBar.style.display = "none";
           gameInstance = unityInstance;
+          loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
-            window.vuplex.SetFullscreen(1)/*https://support.vuplex.com/articles/webgl-fullscreen*/;
+            unityInstance.SetFullscreen(1);
           };
         }).catch((message) => {
           alert(message);
