@@ -125,7 +125,9 @@
       // 开始播放音频
       function playAudio() {
         if (document.visibilityState === 'visible') {
-          audio.play();
+          if(!flog){
+            audio.play();
+          }
         }
       }
 
@@ -136,7 +138,7 @@
       }
 
       function unityPlayAudio() {
-        flog = true;
+        flog = false;
         audio.play();
       }
       
