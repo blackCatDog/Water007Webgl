@@ -129,6 +129,18 @@
         }
       }
 
+      var flog = false;
+      function unityPauseAudio() {
+        flog = true;
+        audio.pause();
+      }
+
+      function unityPlayAudio() {
+        flog = true;
+        audio.play();
+      }
+      
+
       // 暂停音频
       function pauseAudio() {
         audio.pause();
